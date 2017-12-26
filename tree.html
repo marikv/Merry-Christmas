@@ -1,0 +1,121 @@
+<div id="tree"></div>
+<div id="text">Merry Christmas!</div>
+
+<script>
+	var treeHeight = 30,
+		colorsCount = 8,
+		str = '', i, j, s, globs, textIterator,
+		rand = function (minimum, maximum) {
+			return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+		};
+
+	for( i=0; i<treeHeight; i++ ){
+		if ( i===0 )
+			s = '<span class="star">&#x2605;</span>'; // steaua
+		else {
+			s = '';
+			for( j=0; j<i; j++ ) {
+				if (j!==0 && j!==(i-1) && rand(1, 4) === 1)
+					s += '<span class="glob color-' + rand(1, colorsCount) + " shadow-" + rand(1, colorsCount)+ '">O</span>'; // globulețe
+				else
+					s += '<span class="green">*</span>'; // acele bradului
+			}
+		}
+		str += s +'<br>';
+	}
+
+	str +='|&nbsp;&nbsp;&nbsp;|<br>'; // tulpina bradului
+
+	document.getElementById('tree').innerHTML = str;
+
+	setInterval( function () {
+		globs = document.getElementsByClassName('glob');
+		for(var i=0; i< globs.length; i++ ) {
+			globs[i].className = "glob color-" + rand(1, colorsCount) + " shadow-" + rand(1, colorsCount); // schimbăm culoarea globulețelor cu intervalul = 1 sec (1000 ms).
+		}
+	},1000);
+
+	textIterator = 0;
+	setInterval(function () {
+		document.getElementById('text').className = "shadow-"+ ((textIterator % colorsCount) + 1);// schimbam umbra textului cu intervalul de 150 ms
+		textIterator ++;
+	}, 150);
+</script>
+
+<style>
+
+	#tree{
+		text-align: center;
+	}
+	#text {
+		font-size: 50px;
+		font-weight: bold;
+		text-align: center;
+		color: rgba(255,8,86,0.78);
+	}
+	.star {
+		font-size: 30px;
+		color: orangered;
+		text-shadow: 0px 0px 13px #FF0000;
+	}
+	.green {
+		color: green;
+		font-size: 15px;
+		line-height: 13px;
+	}
+	.glob {
+		color: red;
+		text-shadow: 0px 0px 13px red;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 11px;
+		line-height: 13px;
+	}
+	.color-1{
+		color: #FF0856;
+	}
+	.color-2{
+		color: #0000FF;
+	}
+	.color-3{
+		color: #800080;
+	}
+	.color-4{
+		color: #00FF00;
+	}
+	.color-5{
+		color: #8c85ff;
+	}
+	.color-6{
+		color: #b45200;
+	}
+	.color-7{
+		color: #137B65;
+	}
+	.color-8{
+		color: #FFFE04;
+	}
+	.shadow-1{
+		text-shadow: 0px 0px 13px #FF0856;
+	}
+	.shadow-2{
+		text-shadow: 0px 0px 13px #0000FF;
+	}
+	.shadow-3{
+		text-shadow: 0px 0px 13px #800080;
+	}
+	.shadow-4{
+		text-shadow: 0px 0px 13px #00FF00;
+	}
+	.shadow-5{
+		text-shadow: 0px 0px 13px #8c85ff;
+	}
+	.shadow-6{
+		text-shadow: 0px 0px 13px #a64e00;
+	}
+	.shadow-7{
+		text-shadow: 0px 0px 13px #137B65;
+	}
+	.shadow-8{
+		text-shadow: 0px 0px 13px #FFFE04;
+	}
+</style>
